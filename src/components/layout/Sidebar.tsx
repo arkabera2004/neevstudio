@@ -78,16 +78,14 @@ export function Sidebar() {
 
   return (
     <aside className="hidden lg:flex h-screen w-[260px] shrink-0 flex-col bg-sidebar text-sidebar-foreground sticky top-0">
-      <div className="flex flex-col items-center gap-2 px-5 py-5 border-b border-sidebar-border">
-        <div className="rounded-lg bg-white px-4 py-3 shadow-sm">
-          <img
-            src="/J2W_Logo.png"
-            alt="Joules to Watts"
-            className="h-11 w-auto"
-            width={176}
-            height={88}
-          />
-        </div>
+      <div className="flex flex-col items-center gap-2 px-5 py-6 border-b border-sidebar-border">
+        <img
+          src="/brand/wayam-logo-dark-bg.svg"
+          alt="Wayam AI"
+          className="h-9 w-auto"
+          width={220}
+          height={62}
+        />
         <div className="text-[10.5px] tracking-wide text-sidebar-foreground/70">
           {APP_NAME} - {APP_TAGLINE}
         </div>

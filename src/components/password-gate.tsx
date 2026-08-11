@@ -39,7 +39,8 @@ export function PasswordGate({ children }: { children: ReactNode }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-background px-4">
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-6 bg-background px-4">
+      <img src="/brand/wayam-logo-light-bg.svg" alt="Wayam AI" className="h-9 w-auto" />
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle className="text-xl">{APP_NAME}</CardTitle>
