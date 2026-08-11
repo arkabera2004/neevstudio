@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent, type ReactNode } from "react";
+import { useState, type FormEvent, type ReactNode } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,10 +9,12 @@ import { APP_NAME } from "@/lib/branding";
 // Demo credential check — there's no user backend yet, so this validates
 // against one fixed account rather than accepting any email/password. Real
 // accounts (and a real auth backend) replace this later.
+//
+// Deliberately not persisted (no localStorage/cookie) — every fresh load of
+// the app (new tab, reload, reopening the link) shows the login page again.
+// Signing in only unlocks the current in-memory session.
 const DEMO_EMAIL = "demo@neevstudio.ai";
 const DEMO_PASSWORD = "Joules@123";
-// Stored value is the email itself, so changing the demo account re-gates everyone.
-const GATE_STORAGE_KEY = "neevstudio-auth";
 
 export function LoginGate({ children }: { children: ReactNode }) {
   const [unlocked, setUnlocked] = useState(false);
@@ -20,22 +22,12 @@ export function LoginGate({ children }: { children: ReactNode }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
 
-  useEffect(() => {
-    const stored = typeof window !== "undefined" && localStorage.getItem(GATE_STORAGE_KEY);
-    if (stored === DEMO_EMAIL) setUnlocked(true);
-  }, []);
-
   if (unlocked) return <>{children}</>;
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const emailMatches = email.trim().toLowerCase() === DEMO_EMAIL;
     if (emailMatches && password === DEMO_PASSWORD) {
-      try {
-        localStorage.setItem(GATE_STORAGE_KEY, DEMO_EMAIL);
-      } catch {
-        /* ignore */
-      }
       setUnlocked(true);
     } else {
       setError(true);
