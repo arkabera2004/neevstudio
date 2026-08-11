@@ -1,0 +1,18 @@
+# Render blueprint — deploys Veritrace as ONE Docker web service.
+# The image runs nginx on $PORT, reverse-proxying /api → FastAPI backend and
+# everything else → the TanStack Start (Nitro) frontend. Render injects $PORT.
+services:
+  - type: web
+    name: veritrace
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    autoDeploy: true
+    # /api/health proves nginx → uvicorn is wired up (and the frontend build shipped).
+    healthCheckPath: /api/health
+    envVars:
+      # Set the actual value in the Render dashboard → Environment tab (kept out of git).
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-4o-mini

@@ -1,0 +1,293 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+/* Google Sans — self-hosted (see public/fonts). Referenced by --font-sans below. */
+@font-face {
+  font-family: "Google Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/GoogleSans-Regular.woff") format("woff");
+}
+@font-face {
+  font-family: "Google Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/GoogleSans-Medium.woff") format("woff");
+}
+@font-face {
+  font-family: "Google Sans";
+  font-style: normal;
+  font-weight: 600 700;
+  font-display: swap;
+  src: url("/fonts/GoogleSans-Bold.woff") format("woff");
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "Google Sans", "Product Sans", Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Semantic domain + status tokens */
+  --color-teal: var(--teal);
+  --color-teal-soft: var(--teal-soft);
+  --color-coral: var(--coral);
+  --color-coral-soft: var(--coral-soft);
+  --color-amber-brand: var(--amber-brand);
+  --color-amber-soft: var(--amber-soft);
+  --color-sw: var(--sw);
+  --color-sw-soft: var(--sw-soft);
+  --color-hw: var(--hw);
+  --color-hw-soft: var(--hw-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-porcelain: var(--porcelain);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --shadow-card: 0 1px 2px 0 rgb(15 23 42 / 0.04), 0 1px 3px 0 rgb(15 23 42 / 0.06);
+  --shadow-elevated: 0 4px 12px -2px rgb(15 23 42 / 0.08), 0 2px 6px -1px rgb(15 23 42 / 0.05);
+}
+
+/* LIGHT MODE — clinical instrument panel */
+:root {
+  --radius: 0.625rem;
+
+  --porcelain: oklch(0.985 0.002 240);
+  --background: oklch(0.985 0.002 240);
+  --foreground: oklch(0.18 0.03 250);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.03 250);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.03 250);
+
+  --ink: oklch(0.22 0.04 255); /* deep ink navy */
+  --ink-foreground: oklch(0.96 0.005 240);
+
+  --primary: oklch(0.55 0.11 195); /* teal */
+  --primary-foreground: oklch(0.99 0 0);
+
+  --secondary: oklch(0.96 0.005 240);
+  --secondary-foreground: oklch(0.22 0.04 255);
+
+  --muted: oklch(0.965 0.005 240);
+  --muted-foreground: oklch(0.5 0.02 250);
+
+  --accent: oklch(0.95 0.02 200);
+  --accent-foreground: oklch(0.22 0.04 255);
+
+  --destructive: oklch(0.62 0.19 22);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --border: oklch(0.92 0.008 240);
+  --input: oklch(0.92 0.008 240);
+  --ring: oklch(0.55 0.11 195);
+
+  /* Domain + status */
+  --teal: oklch(0.55 0.11 195);
+  --teal-soft: oklch(0.94 0.04 195);
+  --coral: oklch(0.65 0.19 22);
+  --coral-soft: oklch(0.95 0.04 22);
+  --amber-brand: oklch(0.75 0.14 75);
+  --amber-soft: oklch(0.96 0.05 85);
+  --sw: oklch(0.55 0.16 255); /* software blue */
+  --sw-soft: oklch(0.95 0.03 255);
+  --hw: oklch(0.5 0.18 300); /* hardware violet */
+  --hw-soft: oklch(0.95 0.03 300);
+  --success: oklch(0.58 0.14 152);
+  --success-soft: oklch(0.94 0.05 152);
+
+  --chart-1: oklch(0.55 0.11 195);
+  --chart-2: oklch(0.55 0.16 255);
+  --chart-3: oklch(0.5 0.18 300);
+  --chart-4: oklch(0.75 0.14 75);
+  --chart-5: oklch(0.65 0.19 22);
+
+  --sidebar: oklch(0.22 0.04 255);
+  --sidebar-foreground: oklch(0.85 0.02 240);
+  --sidebar-primary: oklch(0.55 0.11 195);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.28 0.05 255);
+  --sidebar-accent-foreground: oklch(0.98 0 0);
+  --sidebar-border: oklch(0.3 0.04 255);
+  --sidebar-ring: oklch(0.55 0.11 195);
+}
+
+.dark {
+  --background: oklch(0.15 0.02 255);
+  --foreground: oklch(0.95 0.005 240);
+
+  --card: oklch(0.19 0.025 255);
+  --card-foreground: oklch(0.95 0.005 240);
+  --popover: oklch(0.19 0.025 255);
+  --popover-foreground: oklch(0.95 0.005 240);
+
+  --ink: oklch(0.12 0.02 255);
+  --ink-foreground: oklch(0.96 0.005 240);
+
+  --primary: oklch(0.7 0.12 195);
+  --primary-foreground: oklch(0.15 0.02 255);
+
+  --secondary: oklch(0.24 0.03 255);
+  --secondary-foreground: oklch(0.95 0.005 240);
+
+  --muted: oklch(0.23 0.025 255);
+  --muted-foreground: oklch(0.68 0.02 240);
+
+  --accent: oklch(0.27 0.04 200);
+  --accent-foreground: oklch(0.95 0.005 240);
+
+  --destructive: oklch(0.68 0.19 22);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --border: oklch(0.28 0.03 255);
+  --input: oklch(0.28 0.03 255);
+  --ring: oklch(0.7 0.12 195);
+
+  --teal: oklch(0.7 0.12 195);
+  --teal-soft: oklch(0.3 0.06 195);
+  --coral: oklch(0.72 0.18 22);
+  --coral-soft: oklch(0.32 0.08 22);
+  --amber-brand: oklch(0.8 0.14 75);
+  --amber-soft: oklch(0.32 0.08 75);
+  --sw: oklch(0.7 0.15 255);
+  --sw-soft: oklch(0.3 0.08 255);
+  --hw: oklch(0.68 0.16 300);
+  --hw-soft: oklch(0.3 0.08 300);
+  --success: oklch(0.7 0.14 152);
+  --success-soft: oklch(0.3 0.08 152);
+
+  --chart-1: oklch(0.7 0.12 195);
+  --chart-2: oklch(0.7 0.15 255);
+  --chart-3: oklch(0.68 0.16 300);
+  --chart-4: oklch(0.8 0.14 75);
+  --chart-5: oklch(0.72 0.18 22);
+
+  --sidebar: oklch(0.12 0.02 255);
+  --sidebar-foreground: oklch(0.85 0.02 240);
+  --sidebar-primary: oklch(0.7 0.12 195);
+  --sidebar-primary-foreground: oklch(0.15 0.02 255);
+  --sidebar-accent: oklch(0.2 0.03 255);
+  --sidebar-accent-foreground: oklch(0.98 0 0);
+  --sidebar-border: oklch(0.24 0.03 255);
+  --sidebar-ring: oklch(0.7 0.12 195);
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+@utility waveform-draw {
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation:
+    wave-draw 3.2s ease-out forwards,
+    wave-pulse 4s ease-in-out 3.2s infinite;
+}
+
+@keyframes wave-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes wave-pulse {
+  0%,
+  100% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility card-in {
+  animation: card-in 0.5s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html,
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Tabular numerals globally on numeric-heavy elements */
+  .tabular,
+  td,
+  th,
+  [data-tabular] {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+}

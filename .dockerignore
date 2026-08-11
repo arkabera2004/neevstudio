@@ -1,0 +1,28 @@
+node_modules
+.output
+.nitro
+.tanstack
+dist
+dist-ssr
+.git
+.vscode
+.idea
+*.log
+.DS_Store
+.wrangler
+.dev.vars
+Dockerfile
+.dockerignore
+
+# Backend: never bake the secret or local Python artifacts into the image.
+backend/.env
+backend/.venv
+backend/venv
+**/__pycache__
+*.pyc
+.venv
+venv
+
+# Runtime/eval artifacts — never bake local runs into the image.
+backend/runs
+backend/eval_runs

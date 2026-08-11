@@ -1,0 +1,67 @@
+# Dokploy production compose for the J2W shared host.
+# See deploy/dokploy-on-this-server.md for the host playbook.
+# Required env (set in Dokploy, never committed):
+#   COMPOSE_PROJECT_NAME=veritrace-prod  APP_SLUG=veritrace
+#   APP_HOST=veritrace.joulestowatts.online
+#   OPENAI_API_KEY=sk-...                OPENAI_MODEL=gpt-5.4-mini
+#   POSTGRES_PASSWORD=<random>           (run history for Breakdown/Capability Map)
+name: ${COMPOSE_PROJECT_NAME:?COMPOSE_PROJECT_NAME is required}
+
+networks:
+  dokploy-network:
+    external: true
+  default: {}
+
+services:
+  web:
+    build:
+      context: ..          # compose lives in deploy/; Dockerfile is at repo root
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    networks: [default, dokploy-network]
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY:?OPENAI_API_KEY is required}
+      OPENAI_MODEL: ${OPENAI_MODEL:?OPENAI_MODEL is required}
+      # Constructed inline rather than forwarded, per the empty-env trap below.
+      DATABASE_URL: postgresql://veritrace:${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}@postgres:5432/veritrace
+      # OPENAI_BASE_URL / CORS_ORIGINS / LLM_LOG_PATH intentionally NOT forwarded:
+      # an empty value would override the in-app default (empty-env trap, playbook §5).
+    volumes:
+      - runs:/app/backend/runs      # Doc Studio run persistence (live-demo recovery)
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      # Goes through nginx → uvicorn, so it proves both the proxy and backend are up.
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:10000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=dokploy-network
+      - traefik.http.routers.${APP_SLUG:?APP_SLUG is required}-web.rule=Host(`${APP_HOST:?APP_HOST is required}`)
+      - traefik.http.routers.${APP_SLUG}-web.entrypoints=websecure
+      - traefik.http.routers.${APP_SLUG}-web.tls.certresolver=letsencrypt
+      - traefik.http.services.${APP_SLUG}-web.loadbalancer.server.port=10000
+
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    networks: [default]           # internal only — never on dokploy-network
+    environment:
+      POSTGRES_USER: veritrace
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+      POSTGRES_DB: veritrace
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U veritrace -d veritrace"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  runs:
+  pgdata:

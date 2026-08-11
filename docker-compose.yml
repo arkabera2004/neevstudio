@@ -1,0 +1,47 @@
+# Local verification of the COMBINED production image (what Render runs).
+#
+#   docker compose up --build
+#   → open http://localhost:8080  (frontend + /api on the same origin)
+#
+# The OpenAI key is read from backend/.env (gitignored). nginx binds PORT (8080 here).
+#
+# Postgres backs run history for New Breakdown + AI Capability Map (optional —
+# the app degrades to no-history without it). For local dev against uvicorn,
+# run just the database:  docker compose up -d postgres
+services:
+  veritrace:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      # Overrides the localhost DSN in backend/.env (environment beats env_file).
+      - DATABASE_URL=postgresql://veritrace:veritrace@postgres:5432/veritrace
+    env_file:
+      - backend/.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: veritrace
+      POSTGRES_PASSWORD: veritrace
+      POSTGRES_DB: veritrace
+    ports:
+      - "5437:5432" # published so a locally-run uvicorn can reach it (5432 is taken by other projects on this host)
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U veritrace -d veritrace"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  pgdata:
