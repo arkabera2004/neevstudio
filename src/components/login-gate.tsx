@@ -32,7 +32,7 @@ export function LoginGate({ children }: { children: ReactNode }) {
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-6 bg-background px-4">
-      <img src="/brand/wayam-logo-light-bg.svg" alt="Wayam AI" className="h-9 w-auto" />
+      <img src="/brand/wayam-logo-light-bg.svg" alt="Wayam AI" className="h-24 w-auto" />
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle className="text-xl">{APP_NAME}</CardTitle>
