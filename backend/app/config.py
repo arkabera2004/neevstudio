@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     # Doc Studio produces customer-facing deliverables in a single pass, and the
     # quality difference between model tiers shows up directly in the exported
     # Word file. Override per environment with GEMINI_MODEL.
-    gemini_model: str = "gemini-2.5-flash"
+    gemini_model: str = "gemini-flash-latest"
     gemini_base_url: str | None = None
     cors_origins: str = "http://localhost:8080,http://localhost:3000,http://127.0.0.1:8080"
     # Optional JSONL file for per-call token/latency telemetry (set LLM_LOG_PATH).
