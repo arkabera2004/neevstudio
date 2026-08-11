@@ -128,23 +128,24 @@
   --input: oklch(0.92 0.008 240);
   --ring: oklch(0.646 0.222 41.116);
 
-  /* Domain + status */
-  --teal: oklch(0.55 0.11 195);
-  --teal-soft: oklch(0.94 0.04 195);
+  /* Domain + status — all warm/orange family; distinguished by lightness &
+     hue-shift within orange-red-amber, not by leaving the family. */
+  --teal: oklch(0.58 0.18 35); /* rust — was cool teal */
+  --teal-soft: oklch(0.94 0.045 35);
   --coral: oklch(0.65 0.19 22);
   --coral-soft: oklch(0.95 0.04 22);
   --amber-brand: oklch(0.75 0.14 75);
   --amber-soft: oklch(0.96 0.05 85);
-  --sw: oklch(0.55 0.16 255); /* software blue */
-  --sw-soft: oklch(0.95 0.03 255);
-  --hw: oklch(0.5 0.18 300); /* hardware violet */
-  --hw-soft: oklch(0.95 0.03 300);
+  --sw: oklch(0.74 0.13 80); /* gold — was software blue */
+  --sw-soft: oklch(0.96 0.035 80);
+  --hw: oklch(0.48 0.19 28); /* burnt orange — was hardware violet */
+  --hw-soft: oklch(0.93 0.05 28);
   --success: oklch(0.58 0.14 152);
   --success-soft: oklch(0.94 0.05 152);
 
   --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.55 0.16 255);
-  --chart-3: oklch(0.5 0.18 300);
+  --chart-2: oklch(0.74 0.13 80);
+  --chart-3: oklch(0.48 0.19 28);
   --chart-4: oklch(0.75 0.14 75);
   --chart-5: oklch(0.65 0.19 22);
 
@@ -189,22 +190,22 @@
   --input: oklch(0.28 0.03 255);
   --ring: oklch(0.75 0.183 55.934);
 
-  --teal: oklch(0.7 0.12 195);
-  --teal-soft: oklch(0.3 0.06 195);
+  --teal: oklch(0.72 0.16 38); /* rust, brightened for dark bg */
+  --teal-soft: oklch(0.3 0.07 35);
   --coral: oklch(0.72 0.18 22);
   --coral-soft: oklch(0.32 0.08 22);
   --amber-brand: oklch(0.8 0.14 75);
   --amber-soft: oklch(0.32 0.08 75);
-  --sw: oklch(0.7 0.15 255);
-  --sw-soft: oklch(0.3 0.08 255);
-  --hw: oklch(0.68 0.16 300);
-  --hw-soft: oklch(0.3 0.08 300);
+  --sw: oklch(0.82 0.12 82); /* gold */
+  --sw-soft: oklch(0.32 0.07 80);
+  --hw: oklch(0.62 0.18 30); /* burnt orange */
+  --hw-soft: oklch(0.3 0.08 28);
   --success: oklch(0.7 0.14 152);
   --success-soft: oklch(0.3 0.08 152);
 
   --chart-1: oklch(0.75 0.183 55.934);
-  --chart-2: oklch(0.7 0.15 255);
-  --chart-3: oklch(0.68 0.16 300);
+  --chart-2: oklch(0.82 0.12 82);
+  --chart-3: oklch(0.62 0.18 30);
   --chart-4: oklch(0.8 0.14 75);
   --chart-5: oklch(0.72 0.18 22);
 
