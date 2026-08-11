@@ -6,16 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { APP_NAME } from "@/lib/branding";
 
-// Demo credential check — there's no user backend yet, so this validates
-// against one fixed account rather than accepting any email/password. Real
-// accounts (and a real auth backend) replace this later.
+// Demo mode — there's no user backend yet, so any well-formed email plus any
+// non-empty password signs in. This is intentionally not real auth.
 //
-// Deliberately not persisted (no localStorage/cookie) — every fresh load of
-// the app (new tab, reload, reopening the link) shows the login page again.
-// Signing in only unlocks the current in-memory session.
-const DEMO_EMAIL = "demo@neevstudio.ai";
-const DEMO_PASSWORD = "Joules@123";
-
+// Not persisted (no localStorage/cookie) — every fresh load of the app (new
+// tab, reload, reopening the link) shows the login page again. Signing in
+// only unlocks the current in-memory session.
 export function LoginGate({ children }: { children: ReactNode }) {
   const [unlocked, setUnlocked] = useState(false);
   const [email, setEmail] = useState("");
@@ -26,8 +22,8 @@ export function LoginGate({ children }: { children: ReactNode }) {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const emailMatches = email.trim().toLowerCase() === DEMO_EMAIL;
-    if (emailMatches && password === DEMO_PASSWORD) {
+    const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+    if (validEmail && password.length > 0) {
       setUnlocked(true);
     } else {
       setError(true);
@@ -72,15 +68,13 @@ export function LoginGate({ children }: { children: ReactNode }) {
                   setError(false);
                 }}
               />
-              {error && (
-                <p className="text-sm text-destructive">Incorrect email or password.</p>
-              )}
+              {error && <p className="text-sm text-destructive">Enter a valid email and password.</p>}
             </div>
             <Button type="submit" className="w-full">
               Sign in
             </Button>
             <p className="text-center text-[11px] text-muted-foreground">
-              Demo access: {DEMO_EMAIL} / {DEMO_PASSWORD}
+              Demo mode — any email and password will sign you in.
             </p>
           </form>
         </CardContent>
