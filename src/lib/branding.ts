@@ -8,4 +8,3 @@ export const APP_NAME = import.meta.env.VITE_APP_NAME ?? "NeevStudio";
 
 /** Long form used in the sidebar wordmark and document titles. */
 export const APP_TAGLINE = "Product Development Intelligence";
-// deploy-verification 1786434063
