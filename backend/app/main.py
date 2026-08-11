@@ -1,6 +1,6 @@
-"""Veritrace AI backend — powers the AI Capability Map page.
+"""NeevStudio AI backend — powers the AI Capability Map page.
 
-Exposes the agent registry and a run endpoint that invokes OpenAI with the key
+Exposes the agent registry and a run endpoint that invokes Gemini with the key
 from backend/.env and returns a structured, renderable result.
 """
 from __future__ import annotations
@@ -36,7 +36,7 @@ async def lifespan(_: FastAPI):
     db.close()
 
 
-app = FastAPI(title="Veritrace AI Backend", version="0.1.0", lifespan=lifespan)
+app = FastAPI(title="NeevStudio AI Backend", version="0.1.0", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,

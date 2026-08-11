@@ -1,4 +1,4 @@
-// Client for the Veritrace AI backend (powers New Breakdown, Requirements
+// Client for the NeevStudio AI backend (powers New Breakdown, Requirements
 // Matrix and the AI Capability Map page).
 // Defaults to same-origin "/api" — in production nginx proxies /api to the backend,
 // and in dev Vite proxies /api to the local FastAPI server (see vite.config.ts).
