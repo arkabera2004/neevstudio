@@ -11,7 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportError } from "../lib/error-reporting";
-import { PasswordGate } from "@/components/password-gate";
+import { LoginGate } from "@/components/login-gate";
 import { ThemeProvider } from "@/components/theme-provider";
 import { APP_NAME, APP_TAGLINE } from "@/lib/branding";
 
@@ -138,9 +138,9 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <PasswordGate>
+        <LoginGate>
           <Outlet />
-        </PasswordGate>
+        </LoginGate>
       </ThemeProvider>
     </QueryClientProvider>
   );
