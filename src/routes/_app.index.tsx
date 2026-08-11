@@ -108,8 +108,8 @@ function Overview() {
       />
 
       {/* Hero */}
-      <div className="relative">
-        <WaveformHero />
+      <div className="relative min-h-[340px] sm:min-h-[300px] md:min-h-[220px]">
+        <WaveformHero className="absolute inset-0" />
         <div className="absolute inset-0 p-6 flex flex-col justify-between">
           <div>
             <div className="text-[10.5px] uppercase tracking-widest text-ink-foreground/60">

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search, Bell, Settings, Command } from "lucide-react";
+import { Search, Bell, Settings, Command, Menu } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -12,15 +12,38 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { SidebarNav } from "@/components/layout/Sidebar";
 import { programs, notifications } from "@/lib/mock-data";
 
 export function Topbar() {
   const [activeProgram, setActiveProgram] = useState(programs[0]);
+  const [navOpen, setNavOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-30 h-14 border-b border-border bg-card/90 backdrop-blur">
       <div className="flex h-full items-center gap-3 px-5">
+        {/* Mobile nav trigger */}
+        <Sheet open={navOpen} onOpenChange={setNavOpen}>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-9 w-9 lg:hidden"
+            onClick={() => setNavOpen(true)}
+          >
+            <Menu className="h-4.5 w-4.5" />
+            <span className="sr-only">Open navigation</span>
+          </Button>
+          <SheetContent
+            side="left"
+            className="w-[280px] p-0 bg-sidebar text-sidebar-foreground border-sidebar-border flex flex-col [&>button]:text-sidebar-foreground"
+          >
+            <SheetTitle className="sr-only">Navigation</SheetTitle>
+            <SidebarNav onNavigate={() => setNavOpen(false)} />
+          </SheetContent>
+        </Sheet>
+
         {/* Program switcher */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

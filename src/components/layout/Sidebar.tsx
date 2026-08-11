@@ -72,12 +72,13 @@ const groups = [
   },
 ];
 
-export function Sidebar() {
+/** Nav content shared by the desktop rail and the mobile sheet. */
+export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
   const { location } = useRouterState();
   const path = location.pathname;
 
   return (
-    <aside className="hidden lg:flex h-screen w-[260px] shrink-0 flex-col bg-sidebar text-sidebar-foreground sticky top-0">
+    <>
       <div className="flex flex-col items-center gap-2 px-5 py-6 border-b border-sidebar-border">
         <img
           src="/brand/wayam-logo-dark-bg.svg"
@@ -86,7 +87,7 @@ export function Sidebar() {
           width={220}
           height={62}
         />
-        <div className="text-[10.5px] tracking-wide text-sidebar-foreground/70">
+        <div className="text-[10.5px] tracking-wide text-sidebar-foreground/70 text-center">
           {APP_NAME} - {APP_TAGLINE}
         </div>
       </div>
@@ -105,8 +106,9 @@ export function Sidebar() {
                   <li key={item.to}>
                     <Link
                       to={item.to}
+                      onClick={onNavigate}
                       className={cn(
-                        "group flex items-center gap-2.5 rounded-md px-2.5 py-1.5 text-[13px] transition-colors",
+                        "group flex items-center gap-2.5 rounded-md px-2.5 py-2 lg:py-1.5 text-[13px] transition-colors",
                         active
                           ? "bg-sidebar-accent text-sidebar-accent-foreground"
                           : "text-sidebar-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground",
@@ -144,6 +146,14 @@ export function Sidebar() {
       <div className="border-t border-sidebar-border px-4 py-3 text-[11px] text-sidebar-foreground/60">
         v2.14.0 · build 8842
       </div>
+    </>
+  );
+}
+
+export function Sidebar() {
+  return (
+    <aside className="hidden lg:flex h-screen w-[260px] shrink-0 flex-col bg-sidebar text-sidebar-foreground sticky top-0">
+      <SidebarNav />
     </aside>
   );
 }

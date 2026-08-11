@@ -1,10 +1,17 @@
 import { useMemo } from "react";
+import { cn } from "@/lib/utils";
 
 /**
  * Ventilator pressure–time waveform. Animated draw + subtle pulse.
  * Signature motif — also usable inline as a small logomark.
  */
-export function WaveformHero({ height = 220 }: { height?: number }) {
+export function WaveformHero({
+  height = 220,
+  className = "",
+}: {
+  height?: number;
+  className?: string;
+}) {
   const path = useMemo(() => {
     // Generate a synthetic ventilator inspiratory/expiratory curve
     const w = 1200;
@@ -29,7 +36,12 @@ export function WaveformHero({ height = 220 }: { height?: number }) {
   }, [height]);
 
   return (
-    <div className="relative overflow-hidden rounded-xl bg-ink text-ink-foreground shadow-elevated">
+    <div
+      className={cn(
+        "overflow-hidden rounded-xl bg-ink text-ink-foreground shadow-elevated",
+        className,
+      )}
+    >
       {/* grid overlay */}
       <svg
         className="absolute inset-0 h-full w-full opacity-[0.08]"
@@ -46,7 +58,7 @@ export function WaveformHero({ height = 220 }: { height?: number }) {
       <svg
         viewBox={`0 0 1200 ${height}`}
         preserveAspectRatio="none"
-        className="relative block h-[220px] w-full"
+        className="relative block h-full w-full"
       >
         <defs>
           <linearGradient id="wave-fill" x1="0" x2="0" y1="0" y2="1">
