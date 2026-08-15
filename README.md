@@ -1,7 +1,7 @@
 # Neevstudio - Product Development Intelligence
 
 **AI-assisted product development intelligence for regulated hardware.**
-A [JoulesToWatts](https://www.joulestowatts.com) product.
+A Wayam AI product.
 
 Neevstudio is a server-rendered web application that takes a regulated-hardware
 product (e.g. a critical-care ventilator) from a written scope all the way to a
